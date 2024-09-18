@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -38,10 +39,5 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "typescript": "~5.5.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "ng build --base-href \"https://d-silvas.github.io\""
-    }
   }
 }
