@@ -28,6 +28,7 @@
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.20",
+    "husky": "^9.1.6",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -37,5 +38,10 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "typescript": "~5.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "ng build --base-href \"https://d-silvas.github.io\""
+    }
   }
 }
