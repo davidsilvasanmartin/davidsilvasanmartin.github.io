@@ -1,0 +1,46 @@
+<!--<h1>WebDev topics</h1>-->
+<h2>HTML Forms</h2>
+<ul>
+    <li><a href="https://dev.to/sidthesloth92/understanding-html-form-encoding-url-encoded-and-multipart-forms-3lpa">Understanding
+        HTML Form Encoding: URL Encoded and Multipart Forms </a></li>
+</ul>
+<h2>Git (GitHub): Squash & Merge vs Merge Commit</h2>
+<p>
+    My experience: when having the following scenario
+</p>
+<pre>
+             PR #1          PR #2
+    BranchA &lt;----- BranchB &lt;----- BranchC 
+</pre>
+<p>
+    Then we have to merge PR #1 using "Merge pull request" instead of "Squash and merge".
+    Otherwise git will not be able to change the target of PR #2 properly and there will likely be
+    merge conflicts that we'll need to resolve.
+</p>
+<p>
+    On the other hand, "Squash and merge" keeps the commit history clean. All commits in one particular branch
+    are squashed into one commit before being merged into the target branch. I prefer using "Squash and merge"
+    for changes that go into the main branch. This way, when checking the history of a file, I can easily
+    identify the commit in which the change was introduced. This commit identifies the PR. Knowing the PR,
+    I can easily find the context of the change by looking for related Jira tickets or documentation.
+</p>
+<p>
+    In summary, my preference is as follows: use "Merge pull request" for chained PRs and PRs that are targeted
+    to a feature branch. Use "Squash and merge" for PRs that are targeted to the main branch.
+</p>
+<p>
+    Check some readings below:
+</p>
+<ul>
+    <li><a href="https://www.lloydatkinson.net/posts/2022/should-you-squash-merge-or-merge-commit/" target="_blank">Lloyd
+        Atkinson's blog post</a></li>
+    <li><a href="https://www.reddit.com/r/programming/comments/whav9l/should_you_squash_merge_or_merge_commit/"
+           target="_blank">Reddit
+        comments on the previous post</a></li>
+    <li><a href="https://www.reddit.com/r/git/comments/9g0kjv/what_are_the_pros_or_cons_of_squashing_before/"
+           target="_blank">Reddit -
+        Pros and Cons of squashing before merging</a></li>
+    <li><a href="https://blog.mergify.com/what-is-the-difference-between-a-merge-commit-a-squash/" target="_blank">Mergify
+        blog</a></li>
+    <li><a href="https://spin.atomicobject.com/squash-merge/" target="_blank">AtomicObject blog</a></li>
+</ul>

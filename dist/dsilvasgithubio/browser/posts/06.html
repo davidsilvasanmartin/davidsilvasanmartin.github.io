@@ -1,0 +1,75 @@
+<!--<h1>Some probability distributions</h1>-->
+
+<h2>Negative Binomial</h2>
+
+<p>
+    Suppose our random experiment is to perform a sequence of
+    Bernoulli trials \( X = (X_1, X_2, \ldots)\), each with
+    success parameter \( p \in (0, 1]\). The number of
+    successes in the first \(n\) trials:
+</p>
+
+\begin{align}
+Y_n = \sum_{i=1}^n X_i
+\end{align}
+
+<p>
+    has the <strong>binomial distribution</strong> with parameters
+    \(n\) and \(p\).
+</p>
+
+<p>
+    Then, the random variable \(V_k\) that gives the <strong>trial
+    number of the \(k\)th success</strong> is known as the
+    <strong>negative binomial</strong> distribution, \(NB(k, p)\):
+</p>
+
+\begin{align}
+V_k = \min{\{n \in \mathbb{N}_{+} \mid Y_n = k\}}
+\end{align}
+
+<p>
+    It has 2 parameters: the <span style="font-style: italic;"> stopping
+  parameter k</span> and the <span style="font-style: italic;">success
+  probability p</span>. Its pmf is
+</p>
+
+\begin{align}
+P\{V_k = n\} = {n-1 \choose k-1} p^k (1-p)^{n-k}, \quad
+n \in \{k, k+1, k+2, \ldots\}
+\end{align}
+
+<div>
+    And:
+    <ul>
+        <li>
+            \( E[V_k] = \frac{k}{p} \), that is: on average, we need to perform
+            \(\frac{k}{p}\) Bernoulli trials until we obtain the \(k\)th
+            success.
+        </li>
+        <li>
+            \( Var(V_k) = \frac{k(1-p)}{p^2} \)
+        </li>
+    </ul>
+</div>
+
+<div>
+    Links:
+    <ul>
+        <li>
+            <a href="https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/11%3A_Bernoulli_Trials/11.04%3A_The_Negative_Binomial_Distribution">libretexts.org</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Negative_binomial_distribution">Wikipedia</a>
+            Note: our definition is Wikipedia's alternative formulation number 2
+            ("\(n\) trials, given \(r\) successes").
+        </li>
+    </ul>
+</div>
+
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+<!--<script-->
+<!--  id="MathJax-script"-->
+<!--  async-->
+<!--  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"-->
+<!--&gt;</script>-->

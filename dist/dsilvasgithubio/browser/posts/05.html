@@ -1,0 +1,169 @@
+<!--<h1>Ross' Introduction to Probability Models - Ex 3.10</h1>-->
+
+<p>
+    I'm going to create a probability space for a greatly simplified version
+    of Ross' Exercise 3.10.
+</p>
+
+<div style="font-weight:bold;">
+    <span style="text-decoration: underline;">TASK 1:</span>
+    Create a probability space for the following experiment. We have a 2-side die,
+    with values of 1 and 2. We throw this die once and obtain a value \(N\).
+    Then, we throw the die \(N\) more times. We are looking for a probability space
+    for this experiment that fulfills the following conditions:
+    <ul>
+        <li>
+            \(N: \Omega \rightarrow \mathbb{R}\) is a random variable that represents
+            the value we obtain the first time we throw the die. Equivalently, it represents
+            the extra number of times we have to roll the die. Takes values on \(\{1, 2\}\).
+        </li>
+        <li>
+            \( X_1: \Omega \rightarrow \mathbb{R}\) is a random variable that represents
+            the value we obtain the second time we roll the die. Takes values on \(\{1, 2\}\).
+        </li>
+        <li>
+            \( X_2: \Omega \rightarrow \mathbb{R}\) is a random variable that represents
+            the value we obtain the third time we roll the die. Takes values on \(\{1, 2\}\).
+        </li>
+        <li>
+            \(P\{N = 1\} = 1/2\), \(P\{N = 2\} = 1/2\).
+        </li>
+        <li>
+            \(P\{X_1 = 1\} = 1/2\), \(P\{X_1 = 2\} = 1/2\).
+        </li>
+        <li>
+            \(P\{X_2 = 1\} = 1/2\), \(P\{X_2 = 2\} = 1/2\).
+        </li>
+        <li>
+            \(N\), \(X_1\) and \(X_2\) are pariwise independent.
+        </li>
+    </ul>
+</div>
+
+<div style="font-weight:bold;">
+    <span style="text-decoration: underline;">TASK 2:</span>
+    Calculate \( E\left[ \sum_{i=1}^N X_i \right]\).
+</div>
+
+<h2>Task 1</h2>
+
+<p>
+    We define a probability space \((\Omega, \mathcal{F}, P)\) as follows:
+</p>
+<ul>
+    <li>
+        \(\Omega = \{(n; x_1, x_2 ) \mid n, x_1, x_2 \in \{1, 2\}\}\), that is:
+        \(\Omega = \\ \{(1; 1, 1), (1;, 1, 2), (1;, 2, 1), (1; 2, 2), (2; 1, 1), (2; 1, 2), (2; 2, 1), (2; 2, 2)\}\)
+    </li>
+    <li>
+        \(\mathcal{F} = \mathcal{P}(\Omega)\), the superset of \(\Omega\).
+    </li>
+    <li>
+        \(\Omega\) has the uniform probability: \( \forall A \subseteq \Omega: P(A) =
+        \frac{|A|}{|\Omega|}\frac{|A|}{8}\)
+    </li>
+</ul>
+<p>
+    And the random variables:
+    \begin{align}
+    N: &\Omega \rightarrow \mathbb{R}\\
+    &(n; x_1, x_2) \mapsto n
+    \end{align}
+
+
+    \begin{align}
+    X_1: &\Omega \rightarrow \mathbb{R}\\
+    &(n; x_1, x_2) \mapsto x_1
+    \end{align}
+
+    \begin{align}
+    X_2: &\Omega \rightarrow \mathbb{R}\\
+    &(n; x_1, x_2) \mapsto x_2
+    \end{align}
+</p>
+<p>
+    The probability us uniform so it's very easy to see that these definitions
+    fulfill the above requirements.
+</p>
+
+<h2>Problems with task 1</h2>
+<p>
+    The last requirement does not make sense in a real scenario. If true, that would
+    imply for example that \( P\{X_2 = 1 \mid N = 1\} = P\{ X_2 = 1\} = 1/2\).
+    We are saying that the probability that the 2nd throw results in a \(1\),
+    given that we threw the die only once, is \(1/2\). This obviously does not
+    make sense. We would like the probability of the 2nd throw being any value,
+    given that we threw the die only once, to be \(0\).
+</p>
+<p>
+    Therefore, to represent reality, we would like to <strong>remove</strong>
+    the following requirement:
+</p>
+<div style="font-weight:bold;">
+    <ul>
+        <li>
+            \(N\), \(X_1\) and \(X_2\) are pariwise independent.
+        </li>
+    </ul>
+</div>
+
+<p>
+    And <strong>add</strong> the following ones:
+</p>
+<div style="font-weight: bold;">
+    <ul>
+        <li>
+            \(P\{ X_1 = 1 \mid N = 1 \} = P\{ X_1 = 2 \mid N = 1 \} = 1/2 \), and
+            \(P\{ X_1 = 1 \mid N = 2 \} = P\{ X_1 = 1 \mid N = 2 \} = 1/2\).
+        </li>
+        <li>
+            \(P\{ X_2 = 1 \mid N = 1 \} = P\{ X_2 = 2 \mid N = 1 \} = 0\), and
+            \(P\{ X_2 = 1 \mid N = 2 \} = P\{ X_2 = 1 \mid N = 2 \} = 1/2\).
+        </li>
+    </ul>
+</div>
+
+<h3>Attempt #1</h3>
+<p>
+    Let \(\Omega\) be the same set we defined for task 1:
+    \(\Omega = \\ \{(1; 1, 1), (1;, 1, 2), (1;, 2, 1), (1; 2, 2), (2; 1, 1), (2; 1, 2), (2; 2, 1), (2; 2, 2)\}\),
+    and let's try to define a probability measure that fulfills the new conditions.
+</p>
+
+<h3>Attempt #2</h3>
+
+<h2>Task 2</h2>
+
+We want to calculate the expected value of the following function \(Z\):
+\begin{align}
+Z := \sum_{i=1}^N X_i: &\Omega \rightarrow \mathbb{R}\\
+&(1; x_1, x_2) \mapsto x_1 \\
+&(2; x_1, x_2) \mapsto x_1 + x_2
+\end{align}
+
+Whose explicit expression is:
+\begin{align}
+Z: &\Omega \rightarrow \mathbb{R}\\
+&(1; 1, 1) \mapsto 1 \\
+&(1; 1, 2) \mapsto 1 \\
+&(1; 2, 1) \mapsto 2 \\
+&(1; 2, 2) \mapsto 2 \\
+&(2; 1, 1) \mapsto 1 + 1 = 2\\
+&(2; 1, 2) \mapsto 1 + 2 = 3\\
+&(2; 2, 1) \mapsto 2 + 1 = 3 \\
+&(2; 2, 2) \mapsto 2 + 2 = 4 \\
+\end{align}
+
+<p>
+    TODO: calculate expected value the normal way
+</p>
+<p>
+    TODO: calculate expected value the book's way
+</p>
+
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+<!--<script-->
+<!--  id="MathJax-script"-->
+<!--  async-->
+<!--  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"-->
+<!--&gt;</script>-->

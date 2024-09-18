@@ -1,0 +1,242 @@
+<p>
+    Very often we need to be able to differentiate between Typescript interfaces
+    which have some properties in common. This is known as "type narrowing". We
+    are going to cover 3 basic ways of performing type narrowing in Typescript.
+</p>
+
+<p>Let's start with the following example:</p>
+
+<pre class="typescript">
+interface Vehicle {
+    weight: number;
+    wheels?: number;
+    class?: 'A' | '1' | '2' |'3';
+}</pre
+>
+
+<p>
+    In our application we have different vehicles. For trucks, for example, we
+    want to keep track of their weight, and their number of wheels. However, other
+    vehicles (like a yacht) have no wheels, but have other attributes we want to
+    know, like for instance their class, which is a string that can take values
+    'A', '1', '2', or '3'. We might think that a good configuration can be as
+    follows:
+</p>
+
+<pre class="typescript">
+interface Truck {
+    weight: number;
+    wheels: number;
+}
+
+interface Yacht {
+    weight: number;
+    class: 'A' | '1' | '2' | '3';
+}
+
+export type Vehicle = Truck | Yacht;
+</pre>
+
+<p>
+    However, with this setup we will have a problem when trying to use `Vehicle`
+    objects:
+</p>
+
+<img
+        alt="IDE Error"
+        class="wp-image-86"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-10-50-48-1.png"
+/>
+
+<img
+        alt="IDE error property does not exist"
+        class="wp-image-85"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-10-50-52-2.png"
+/>
+
+<p>
+    As we can see, Typescript can't decide whether the input object is a
+    <code>Truck</code> or a <code>Yacht</code>, and it throws the following error:
+    <code>Property 'wheels' does not exist on type 'Yacht'</code>
+    . How can we narrow the object's type? There are at least 3 alternatives:
+</p>
+
+<h2>Create a new "type" property on each of the interfaces</h2>
+
+<pre class="typescript">
+interface Truck {
+    weight: number;
+    wheels: number;
+    type: 'truck';
+}
+
+interface Yacht {
+    weight: number;
+    class: 'A' | '1' | '2' | '3';
+    type: 'yacht';
+}
+
+export type Vehicle = Truck | Yacht;
+</pre>
+
+<p>
+    This is known as
+    <a
+            href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions"
+    >discriminated unions</a
+    >
+    in Typescript. This solution would be the most adequate if our interfaces
+    already had the <code>type</code> attribute beforehand.
+</p>
+
+<p>
+    When using <code>Vehicle</code> objects, now we can use a switch case to
+    differentiate both interfaces:
+</p>
+
+<img
+        alt="Use vehicle in switch statement"
+        class="wp-image-84"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-11-09-22.png"
+/>
+
+<p>
+    If we are using classes instead of interfaces for our types, the following
+    alternative syntax produces the exact same result:
+</p>
+
+<pre class="typescript">
+class Truck {
+  weight: number;
+  wheels: number;
+  readonly type = 'truck';
+}
+
+class Yacht {
+  weight: number;
+  class: 'A' | '1' | '2' | '3';
+  readonly type = 'yacht';
+}
+
+export type Vehicle = Truck | Yacht;</pre
+>
+
+<h2>Use type guards</h2>
+
+<p>
+    <a
+            href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates"
+    >Type guards</a
+    >
+    are functions that help with type narrowing.
+</p>
+
+<pre class="typescript">
+interface Truck {
+  weight: number;
+  wheels: number;
+}
+
+interface Yacht {
+  weight: number;
+  class: 'A' | '1' | '2' | '3';
+}
+
+export type Vehicle = Truck | Yacht;
+
+export function isTruck(arg: any): arg is Truck {
+  return !!arg.weight &amp;&amp; !!arg.wheels;
+}
+
+export function isYacht(arg: any): arg is Yacht {
+  return !!arg.weight &amp;&amp; !!arg.class;
+}</pre
+>
+
+<p>
+    If <code>isTruck(object)</code> returns <code>true</code>, it means that our
+    object is indeed a <code>Truck</code>. We can import and use these functions
+    anywhere in our application:
+</p>
+
+<img
+        alt="Use type guards"
+        class="wp-image-83"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-12-04-09.png"
+/>
+
+<p>
+    However, there is a small problem with this setup: we can still build
+    <code>Vehicle</code> objects which are not <code>Truck</code> nor
+    <code>Yacht</code>:
+</p>
+
+<img
+        alt="Vehicle defined with wheels and class"
+        class="wp-image-82"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-12-17-11.png"
+/>
+
+<h2>Use “never”</h2>
+
+<p>
+    In order to fix this last problem we can use
+    <a
+            href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#the-never-type"
+    >the <code>never</code> type, introduced in Typescript 2.0</a
+    >. If an interface has a property of type <code>never</code>, then that
+    property can not be defined on any object which follows that interface.
+</p>
+
+<pre class="typescript">
+interface Truck {
+  weight: number;
+  wheels: number;
+  class?: never;
+}
+
+interface Yacht {
+  weight: number;
+  wheels?: never;
+  class: 'A' | '1' | '2' | '3';
+}
+
+export type Vehicle = Truck | Yacht;</pre
+>
+
+<p>
+    Type guards work exactly as they previously did, but now we can't create
+    <code>Vehicle</code> objects which have at the same time both the
+    <code>wheels</code> and <code>class</code> properties:
+</p>
+
+<img
+        alt="Error when defining Vehicle with wheels and class"
+        class="wp-image-81"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-12-21-04.png"
+/>
+
+<img
+        alt="Error type not assignable to Vehicle"
+        class="wp-image-80"
+        src="https://cybertricks.blog/wp-content/uploads/2021/07/screenshot-from-2021-07-04-12-21-07.png"
+/>
+
+<p>As we can see we obtain the following error:</p>
+
+<pre class="text">
+Type '{ weight: number; wheels: number; class: "A" }' is not assignable to type 'Vehicle'.
+Types of property 'wheels' are incompatible.
+Type 'number' is not assignable to type 'never'.</pre
+>
+
+<p>
+    <strong>Final tip: </strong>don't forget to check out
+    <a
+            href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
+            rel="noreferrer noopener"
+            target="_blank"
+    >Typescript's own narrowing guide</a
+    >
+    for more advanced forms of type narrowing!
+</p>

@@ -1,0 +1,55 @@
+<!--<h1>Ross' Introduction to Probability Models - Ex 3.11</h1>-->
+
+<p>
+    <strong>
+        A coin, having probability p of coming up heads, is to be successively
+        flipped until the first head appears. What is the expected number of flips
+        required?
+    </strong>
+</p>
+
+<p>
+    First of all, let us define a probability space \( (\Omega, \mathcal{F}, P)\)
+    for this problem.
+</p>
+
+<ul>
+    <li>
+        \( \Omega = \left\{ (w_1, w_2, w_3, \ldots) \mid
+        w_i \in \{0, 1\}, \, i = 1, 2, \ldots \right\}\). Each of the elements of
+        \(\Omega\) is an infinite sequence of 0's and 1's. The set \(\Omega\) is
+        then uncountable (<a
+            href="https://math.stackexchange.com/questions/77656/is-the-power-set-of-the-natural-numbers-countable"
+            target="_blank">see this SO post</a>).
+    </li>
+    <li>
+        \(\mathcal{F} = \mathcal{P}(\Omega)\), the superset of \(\Omega\).
+    </li>
+    <li>
+        The probability is defined as follows. Let \(A_k \subseteq \{0, 1\}^k\) be
+        a set of length \(k\) of \(0\)s and \(1\)s. Then, we define:
+        $$
+        P\left(\{( w_1, w_2, \ldots, w_{k-1}, w_k, w_{k+1}, \ldots) \mid
+        (w_1, w_2, \ldots, w_{k-1}, w_k) \in A_k \}\right) =
+        \frac{|A_k|}{2^k}
+        $$
+    </li>
+</ul>
+
+<p>
+    It can be proven that the probabilities for all elements of \(\mathcal{F}\)
+    are well defined, and thus that \( (\Omega, \mathcal{F}, P)\) is a
+    probability space.
+</p>
+
+<p>
+    <strong>Example 1:</strong> Calculate the probability that the first two
+    coins land on heads.
+</p>
+
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+<!--<script-->
+<!--  id="MathJax-script"-->
+<!--  async-->
+<!--  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"-->
+<!--&gt;</script>-->
