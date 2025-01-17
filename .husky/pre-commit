@@ -1,3 +1,0 @@
-ng build --base-href "https://d-silvas.github.io"
-git rm -r --cached .
-git add .
