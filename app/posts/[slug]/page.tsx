@@ -1,7 +1,6 @@
-import { getAllPosts } from '@/lib/posts';
-import { notFound } from 'next/navigation';
-import MarkdownIt from 'markdown-it';
-import { MarkdownRenderer } from '@/lib/markdown';
+import { getAllPosts } from "@/lib/posts";
+import { notFound } from "next/navigation";
+import { MarkdownRenderer } from "@/lib/markdown";
 
 async function fetchPost(slug) {
   const posts = getAllPosts();
@@ -10,16 +9,12 @@ async function fetchPost(slug) {
   return posts.find((post) => post.slug === slug);
 }
 
-const md = new MarkdownIt();
-
-export default async function Post({ params }) {
+export default async function Post({ params }: { params: any }) {
   const slug = (await params).slug;
   const post = await fetchPost(slug);
   if (!post) {
     notFound();
   }
-
-  const htmlConverter = md.render(post.content);
 
   return (
     <article>
