@@ -1,9 +1,8 @@
 ---
-"title": "Type narrowing in Typescript"
-"created": "2020-10-01T12:34:56Z"
-"published": "2020-10-01T12:34:56Z"
-"location": "posts/01.html"
-"category": "Programming"
+title: "Type narrowing in Typescript"
+created: "2020-10-01T12:34:56Z"
+published: true
+category: "Programming"
 ---
 
 Very often we need to be able to differentiate between Typescript interfaces
@@ -142,7 +141,7 @@ const wrong: Vehicle = {
 }
 ```
 Produces the following error:
-```
+```text
 Type 'string' is not assignable to type '"A" | "1" | "2" | "3" | undefined'.
 The expected type comes from property 'class_' which is declared here on type 'Vehicle'.
 ```
