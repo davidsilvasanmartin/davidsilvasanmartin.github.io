@@ -39,15 +39,12 @@ export const getAllPostsLatex = async () => {
 
       console.log(content);
       const processedContent = await unified()
-        // .use(markdown)
-        // .use(math)
-        // .use(htmlKatex)
-        // .use(html)
         .use(remarkParse)
         .use(remarkMath)
         .use(remarkRehype)
         .use(rehypeKatex)
-        .use(rehypeHighlight) // TODO NOT WORKING & need to find a theme (see "css") https://github.com/rehypejs/rehype-highlight
+        // TODO worth having a look at rehype-starry-night for better highlighting https://github.com/rehypejs/rehype-highlight?tab=readme-ov-file#when-should-i-use-this
+        .use(rehypeHighlight) // TODO could find a better theme (see "css") https://github.com/rehypejs/rehype-highlight
         .use(rehypeStringify)
         .process(content);
       const contentHtml = processedContent.toString();

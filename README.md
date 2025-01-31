@@ -1,6 +1,3 @@
-- https://github.com/remarkjs/remark-math
-
 ## TODO
-- Syntax highlighting
-- Need Mathjax styles because there are some divs
-that have to be hidden and right now are not.
+- Not sure if SCSS is working properly on thus project
+- Check if `@eslint/eslintrc` can be removed

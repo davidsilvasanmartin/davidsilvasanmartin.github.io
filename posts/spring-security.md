@@ -5,6 +5,8 @@ published: true
 category: "Programming"
 ---
 
+TODO + Lookup Dan Vega Spring Security JWT on YouTube
+
 Links
 - [Spring Security architecture](https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-architecture)
 - [Spring Security authentication architecture](https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html)
